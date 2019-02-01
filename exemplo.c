@@ -1,10 +1,3 @@
-
-/**
-@file exemplo.c
-Funções que fazem o jogo correr
-*/
-
-
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
@@ -148,13 +141,13 @@ int casa_ocupada (ESTADO e, int x, int y) {
 }
 
 /**
-\brief Função que nos indica se alguma posição está ocupada por inimigo, obstáculo, jogador ou saída
+\brief Função que nos indica se alguma posição está ocupada por inimigo, obstáculo, jogador ou saída 
 */
 int casa_ocupada_cs (ESTADO e, int x, int y) {
 	return casa_ocupada (e, x, y) || tem_saida (e, x, y);
 }
 /**
-\brief Função que aumenta a experência e o gold do jogador.
+\brief Função que aumenta a experência e o gold do jogador. 
 */
 ESTADO getexp (ESTADO e){
 	e.jog.exp += e.nivel * e.jog.expboost;
@@ -176,25 +169,25 @@ ESTADO atacajogador(ESTADO e, int i){
 	if (e.inimigo[i].type == 0 ){ // Inimigo do tipo Xamã
 		e.jog.heal -= (5 + e.inimigo[i].lvl  - e.jog.spiri / 2) ;
 		if (e.jog.heal < 0) e.jog.heal = 0;
-	}if (e.inimigo[i].type == 1 ){ // Inimigo do tipo
+	}if (e.inimigo[i].type == 1 ){ // Inimigo do tipo 
 		e.jog.heal -= (10 + e.inimigo[i].lvl - e.jog.percep - e.jog.stam/2) ;
 		if (e.jog.heal < 0) e.jog.heal = 0;
 	}if (e.inimigo[i].type == 2 ){ // Inimigo do tipo Arqueiro
 		e.jog.heal -= (10 + e.inimigo[i].lvl - e.jog.percep - e.jog.stam/2) ;
 		if (e.jog.heal < 0) e.jog.heal = 0;
-	}if (e.inimigo[i].type == 3 ){ // Inimigo do tipo
+	}if (e.inimigo[i].type == 3 ){ // Inimigo do tipo 
 		e.jog.heal -= (7 + e.inimigo[i].lvl - e.jog.stam/2 );
 		if (e.jog.heal < 0) e.jog.heal = 0;
 	}
-return e;
+return e;	
 }
 /**
 \brief Função que inverta um valor negativo num positivo e vice-versa.
 */
-int inverte(int x){
-	if (x<0)
+int inverte(int x){ 
+	if (x<0) 
 		return abs(x);
-	else
+	else     
 		x = 0-x;
 	return x;
 		}
@@ -209,7 +202,7 @@ void imprime_ataquesafetado (ESTADO e, int i){
 	int x,y,raioataquex,raioataquey,posalvox,posalvoy; // Abcissa e ordenada da posição do inimigo, raio de ataque do inimigo em ordem a cada eixo do referencial, abcissa e ordenada da posição alvo
 	x = getposinimigox (e, i);
 	y = getposinimigoy (e, i);
-	if (e.inimigo[i].type == 0 ){ // Inimigo do tipo Xamã
+	if (e.inimigo[i].type == 0 ){ // Inimigo do tipo Xamã 
 			for (raioataquey = -3; raioataquey <= 3; raioataquey++){
 				raioataquex = raioataquey;
 				posalvox = raioataquex+x;
@@ -221,14 +214,14 @@ void imprime_ataquesafetado (ESTADO e, int i){
 				posalvoy = raioataquey+y;
 				if (posicao_valida (posalvox, posalvoy))
 				QUADRADOT (posalvox, posalvoy, ESCALA , "#80ff00" , 0.2);
-
+				
 				}
 			}
 
 	if (e.inimigo[i].type == 1 ){ // Inimigo do tipo Rouge
 		for (raioataquex = -1; raioataquex <= 1; raioataquex++)
 			for (raioataquey = -1; raioataquey <= 1; raioataquey++){
-				posalvox = raioataquex+x;
+				posalvox = raioataquex+x;	
 				posalvoy = raioataquey+y;
 				if (posicao_valida (posalvox, posalvoy))
 				QUADRADOT (posalvox, posalvoy, ESCALA , "#ff8000" , 0.2);
@@ -240,7 +233,7 @@ void imprime_ataquesafetado (ESTADO e, int i){
 				posalvoy = raioataquey+y;
 				if (posicao_valida (posalvox, posalvoy))
 				QUADRADOT (posalvox, posalvoy, ESCALA , "#80ff00" , 0.2);
-
+				
 				posalvox = x+raioataquey;
 				posalvoy = y;
 				if (posicao_valida (posalvox, posalvoy))
@@ -254,7 +247,7 @@ void imprime_ataquesafetado (ESTADO e, int i){
 				posalvoy = raioataquey+y;
 				if (posicao_valida (posalvox, posalvoy))
 				QUADRADOT (posalvox, posalvoy, ESCALA , "#0000ff" , 0.2);
-
+				
 			}
 	}
 }
@@ -286,7 +279,7 @@ MATRIZ criaposicao(MATRIZ mapa ,ESTADO e, int x1, int x2, int distjog){
 						if (!tem_shop(e,x,y) && !tem_obstaculo(e,x,y) && !tem_saida(e,x,y)  &&  posicao_valida(x,y)  && (distjog < mapa.map[x][y] )) {
 							mapa.map[x][y] = distjog;
 							mapa = criaposicao( mapa, e, x, y, distjog);
-
+							
 						}
 					}
 		}
@@ -294,7 +287,7 @@ MATRIZ criaposicao(MATRIZ mapa ,ESTADO e, int x1, int x2, int distjog){
 }
 
 
-return mapa;
+return mapa;	
 }
 /**
 \brief Função que inicia a matriz
@@ -326,7 +319,7 @@ POSICAO melhorjogada (ESTADO e, int m, MATRIZ mapa){
 	int valor = 300;
 	x = getposinimigox (e, m);
 	y = getposinimigoy (e, m);
-	valor = mapa.map[x][y];
+	valor = mapa.map[x][y];	
 	for (dx = -1; dx <= 1; dx++)
 		for (dy = -1; dy <= 1; dy++){
 			x = getposinimigox (e, m);
@@ -342,7 +335,7 @@ POSICAO melhorjogada (ESTADO e, int m, MATRIZ mapa){
 	 	}
 
 	e.inimigo[m].pos.x = gx;
-	e.inimigo[m].pos.y = gy;
+	e.inimigo[m].pos.y = gy;	
 
 return e.inimigo[m].pos;
 }
@@ -380,8 +373,8 @@ ESTADO movemonstro (ESTADO e, int i,MATRIZ mapa){
 	int posfinalx,posfinaly;
 	int tipo;
 	tipo = e.inimigo[i].type;
-
-	mapa = alteramatriz (mapa,tipo, getposjogx(e), getposjogy (e),e);
+				
+	mapa = alteramatriz (mapa,tipo, getposjogx(e), getposjogy (e),e);	
 	x = getposinimigox (e, i);
 	y = getposinimigoy (e, i);
 	if (tipo == 0 ){ // Inimigo tipo Xamã
@@ -415,11 +408,11 @@ ESTADO movemonstro (ESTADO e, int i,MATRIZ mapa){
 	posfinaly = posfinaly -  e.inimigo[i].pos.y;
 	ANIMATEMOVEI (i,posfinalx,posfinaly,ESCALA);
 	}
-
-	if (tipo == 1 ){
+	
+	if (tipo == 1 ){ 
 		for (dx = -1; dx <= 1; dx++)
 			for (dy = -1; dy <= 1; dy++){
-				posfinalx = dx+x;
+				posfinalx = dx+x;	
 				posfinaly = dy+y;
 				if (posicao_igualp (e.jog , posfinalx, posfinaly)){
 					ANIMATEATACAI(i,dx,dy,ESCALA);
@@ -434,7 +427,7 @@ ESTADO movemonstro (ESTADO e, int i,MATRIZ mapa){
 			posfinaly = posfinaly -  e.inimigo[i].pos.y;
 			ANIMATEMOVEI (i,posfinalx,posfinaly,ESCALA);
 				}
-	if (tipo == 2 ){
+	if (tipo == 2 ){ 
 			for (dy = -3; dy <= 3; dy++){
 				posfinalx = x;
 				posfinaly = dy+y;
@@ -453,7 +446,7 @@ ESTADO movemonstro (ESTADO e, int i,MATRIZ mapa){
 					posfinaly -= e.inimigo[i].pos.y;
 					ANIMATEATACAISETA(i,posfinalx,posfinaly,ESCALA);
 					return e;
-
+				
 
 				}
 			}
@@ -464,7 +457,7 @@ ESTADO movemonstro (ESTADO e, int i,MATRIZ mapa){
 			posfinaly = posfinaly -  e.inimigo[i].pos.y;
 			ANIMATEMOVEI (i,posfinalx,posfinaly,ESCALA);
 	}
-	if (tipo == 3 ){
+	if (tipo == 3 ){ 
 		for (dx = -1; dx <= 1; dx++)
 			for (dy = -1; dy <= 1; dy++){
 				posfinalx = dx+x;
@@ -482,7 +475,7 @@ ESTADO movemonstro (ESTADO e, int i,MATRIZ mapa){
 			posfinalx -=  e.inimigo[i].pos.x  ;
 			posfinaly -=  e.inimigo[i].pos.y  ;
 			ANIMATEMOVEI (i,posfinalx,posfinaly,ESCALA);
-	}
+	}		
 return e;
 }
 
@@ -509,7 +502,7 @@ ESTADO rangedatack(ESTADO e,int i){
 			e=getexp(e);
 			while ( i < e.num_inimigos){
 				e.inimigo[i] = e.inimigo[i+1];
-				i++;
+				i++;	
 			}
 			e.num_inimigos--;
 			e.enimigosmortos++;
@@ -524,7 +517,7 @@ ESTADO rangedatack(ESTADO e,int i){
 			while ( i < e.num_inimigos){
 
 				e.inimigo[i] = e.inimigo[i+1];
-				i++;
+				i++;	
 			}
 			e.num_inimigos--;
 			e.enimigosmortos++;
@@ -539,7 +532,7 @@ ESTADO rangedatack(ESTADO e,int i){
 
 			while ( i < e.num_inimigos){
 				e.inimigo[i] = e.inimigo[i+1];
-				i++;
+				i++;	
 			}
 			e.num_inimigos--;
 			e.enimigosmortos++;
@@ -555,7 +548,7 @@ ESTADO rangedatack(ESTADO e,int i){
 
 			while ( i < e.num_inimigos){
 				e.inimigo[i] = e.inimigo[i+1];
-				i++;
+				i++;	
 			}
 			e.num_inimigos--;
 			e.enimigosmortos++;
@@ -585,7 +578,7 @@ int comparejogenyvar (ESTADO e, int x, int y){
 	int h;
 	for (h=0; h < e.num_inimigos;h++){
 		if ( x == getposinimigox(e,h) && y == getposinimigoy(e,h))
-			return h;
+			return h;	
 	}
 	return -1;
 }
@@ -598,7 +591,7 @@ void batalharanged (ESTADO e){
 	if(e.jog.shuriken != 0 )
 	{
 		int x,y,dibs,a,b;
-		int range = 3;
+		int range = 3;  	
 		x = getposjogx(e) ;
 		y = getposjogy(e) ;
 		a = x - 3;
@@ -611,7 +604,7 @@ void batalharanged (ESTADO e){
 					if  (dibs >= 0)
 						printbatleranged (x, y, dibs);
 				}
-			}
+			}	
 		}
 	}
 }
@@ -642,7 +635,7 @@ ESTADO inicializar_inimigo (ESTADO e) {
 	e.inimigo[(int) e.num_inimigos].pos.y = y;
 	e.inimigo[(int) e.num_inimigos].type  = z;
 	e.inimigo[(int) e.num_inimigos].lvl  = e.nivel;
-	e.inimigo[(int) e.num_inimigos].heal = 100;
+	e.inimigo[(int) e.num_inimigos].heal = 100;	
 	e.num_inimigos++;
 	return e;
 }
@@ -662,13 +655,13 @@ ESTADO inicializar_inimigos (ESTADO e, int num_inimigos){
 */
 ESTADO inicializar_obstaculo (ESTADO e) {
 	char x; char y;
-	do {
+	do { 
 	x = random() % TAM;
 	y = random() % TAM;
 	} while (casa_ocupada_cs (e, x, y));
 
 	e.obstaculo[(int) e.num_obstaculos].pos.x = x;
-	e.obstaculo[(int) e.num_obstaculos].pos.y = y;
+	e.obstaculo[(int) e.num_obstaculos].pos.y = y;	
 	e.num_obstaculos++;
 	return e;
 }
@@ -697,7 +690,7 @@ ESTADO inicializar_pote (ESTADO e,int i) {
 
 	e.pot[i].pos.x = x;
 	e.pot[i].pos.y = y;
-	t = random() % 2;
+	t = random() % 2; 
 	e.pot[i].type = t;
 	e.num_pot ++;
 	return e;
@@ -746,7 +739,7 @@ ESTADO inicializarlvl0() {
 	e.jog.expboost = 1;
 	e.nivel = 1;
 	e.jog. lvlupstats=0;
-	e.estadojog= 0;
+	e.estadojog= 0;	
 	e.jog.heal = 100;
 	e.jog.mana = 100;
 	e.jog.shuriken  =  10;
@@ -802,28 +795,28 @@ ESTADO inicializar(ESTADO antigo) {
 */
 ESTADO atacamonstro(ESTADO e, int i){
 	int aux;
-	if (e.inimigo[i].type == 0){
+	if (e.inimigo[i].type == 0){ 
 		aux = e.inimigo[i].heal - 80 - 10*e.jog.str;
 		if (aux <= 0){
 			e=getexp(e);
 
 			while ( i < e.num_inimigos){
 				e.inimigo[i] = e.inimigo[i+1];
-				i++;
+				i++;		
 			}
 			e.num_inimigos--;
 			e.enimigosmortos++;
 		}
 		else  e.inimigo[i].heal = aux;
 	}
-	if (e.inimigo[i].type == 1){
+	if (e.inimigo[i].type == 1){ 
 		aux = e.inimigo[i].heal - (80+10*e.jog.str);
 		if (aux <= 0){
 			e=getexp(e);
 
 			while ( i < e.num_inimigos){
 				e.inimigo[i] = e.inimigo[i+1];
-				i++;
+				i++;	
 			}
 			e.num_inimigos--;
 			e.enimigosmortos++;
@@ -832,14 +825,14 @@ ESTADO atacamonstro(ESTADO e, int i){
 
 
 	}
-	if (e.inimigo[i].type == 2){
+	if (e.inimigo[i].type == 2){ 
 		aux = e.inimigo[i].heal - (60+10*e.jog.str);
 		if (aux <= 0){
 			e=getexp(e);
 
 			while ( i < e.num_inimigos){
 				e.inimigo[i] = e.inimigo[i+1];
-				i++;
+				i++;	
 			}
 			e.num_inimigos--;
 			e.enimigosmortos++;
@@ -848,7 +841,7 @@ ESTADO atacamonstro(ESTADO e, int i){
 
 
 	}
-	if (e.inimigo[i].type == 3){
+	if (e.inimigo[i].type == 3){ 
 		aux = e.inimigo[i].heal - (40+10*e.jog.str);
 
 		if (aux <= 0){
@@ -857,14 +850,14 @@ ESTADO atacamonstro(ESTADO e, int i){
 			while ( i < e.num_inimigos){
 				e.inimigo[i] = e.inimigo[i+1];
 				i++;
-				}
+				}	
 			e.num_inimigos--;
 			e.enimigosmortos++;
 		}
 		else  e.inimigo[i].heal = aux;
 
 
-	}
+	}		
 	return e;
 }
 
@@ -885,7 +878,7 @@ void mellebattle (ESTADO e, int x, int y, int c){
 			else QUADRADOT(x, y,ESCALA, "#982354",0.2);
 				FECHAR_LINK;
 		}
-	}
+	}   
 }
 
 
@@ -905,7 +898,7 @@ void imprime_movimento(ESTADO e, int dx, int dy,int c) {
 	if (tem_shop (e,x,y))
 		sprintf(link, "http://localhost/cgi-bin/dibs?shop");
 
-	else	sprintf(link, "http://localhost/cgi-bin/dibs?mov_%i_%i", x,y);
+	else	sprintf(link, "http://localhost/cgi-bin/dibs?mov_%i_%i", x,y);	
 
 
 		ABRIR_LINK(link);
@@ -968,7 +961,7 @@ void imprime_shop(ESTADO e){
 int strgigual (char *x1 , char *x2){
 	int i;
 	for (i=0; (x1[i] != '\0' && x2[i] != '\0') ; i++){
-		if (x1[i] != x2[i] )
+		if (x1[i] != x2[i] ) 
 			return 0;
 	}
 	return 1;
@@ -978,10 +971,10 @@ int strgigual (char *x1 , char *x2){
 \brief Função que faz com que ao clicar na saída faz com que se passe de nivel e gera um tabuleiro aleatório
 */
 ESTADO check_for_exit(ESTADO e) {
-
-		e.nivel++;
+	
+		e.nivel++;	
 		e = inicializar(e);
-
+	
 	return e;
 }
 
@@ -1074,10 +1067,10 @@ printf("%s\n",(estado2str (e)) );
 				while ( i < e.num_pot){
 				e.pot[i] = e.pot[i+1];
 				i++;
-				}
+				}	
 			e.num_pot--;
 		}
-
+					
 		a = e.jog.pos.x;
 		b = e.jog.pos.y;
 		a = a -  x;
@@ -1085,7 +1078,7 @@ printf("%s\n",(estado2str (e)) );
 		printf("%i %i\n",a,b );
 
 		if (x == e.saida.x && y == e.saida.y)
-			return check_for_exit(e);
+			return check_for_exit(e);	
 		ANIMATEMOVEJOG (a,b,ESCALA);
 		e.jog.pos.x = x;
 		e.jog.pos.y = y;
@@ -1095,7 +1088,7 @@ printf("%s\n",(estado2str (e)) );
 		MATRIZ mapa;
 		mapa = criamatriz(e);
 		e = movemonstros (e, mapa);
-
+		
 	}
 	if (strgigual (args, "manapot")){
 		e.jog.manapot--;
@@ -1128,8 +1121,8 @@ printf("%s\n",(estado2str (e)) );
 		mapa = criamatriz(e);
 		e = movemonstros (e, mapa);
 
-
-		}
+		
+		}			
 	if (strgigual (args, "skillz")){
 		if( e.jog.mana >= 20){
 			if (e.showataques == 0){
@@ -1153,16 +1146,16 @@ printf("%s\n",(estado2str (e)) );
 				e.jog.doublejump++;
 				e.jog.mana -= 40;
 				}
-			else {e.jog.doublejump--;
+			else {e.jog.doublejump--; 
 			e.jog.mana += 40;
 			}
 		}
 		else {if (e.jog.doublejump == 1)
-			{e.jog.doublejump--;
+			{e.jog.doublejump--; 
 			e.jog.mana += 40;
 			}
 		}
-
+		
 	}
 	if (strgigual (args, "melle")){
 		if (e.jog.doublejump == 1)
@@ -1185,8 +1178,8 @@ printf("%s\n",(estado2str (e)) );
 		MATRIZ mapa;
 		mapa = criamatriz(e);
 		e = movemonstros (e, mapa);
-
-	}
+					
+	} 	
 	if (strgigual (args, "frezze")){
 		if( e.jog.mana >= 20){
 			if (e.frezze == 0){
@@ -1194,25 +1187,25 @@ printf("%s\n",(estado2str (e)) );
 				e.jog.mana -= 20;
 			}
 		}
-	}
+	}	
 	if (strgigual (args, "obs")){
 		if( e.jog.mana >= 20){
 			if (e.jog.obs == 0){
 				e.jog.obs++;
 				e.jog.mana -= 20;
 				}
-			else {e.jog.obs--;
+			else {e.jog.obs--; 
 			e.jog.mana += 20;
 			}
 		}
 		else{
 			if (e.jog.obs == 1)
-				{e.jog.obs--;
+				{e.jog.obs--; 
 				e.jog.mana += 20;
 			}
 		}
 	}
-
+	
 	if (strgigual (args, "pobs")){
 		int x;
 		e.jog.obs--;
@@ -1272,7 +1265,7 @@ ESTADO ler_estado(char *args) {
 	if(strlen(args) == 0){
 		e = inicializarlvl0();
 	}
-
+	
 	else{
 
 	gameinfo = fopen("/tmp/gameinfo", "r");
@@ -1285,7 +1278,7 @@ ESTADO ler_estado(char *args) {
 
 	gameinfo = fopen("/tmp/gameinfo", "w");
 	fwrite(	&e, sizeof(ESTADO), 1, gameinfo);
-	fclose(gameinfo);
+	fclose(gameinfo);	
 	return e;
 
 }
@@ -1294,15 +1287,15 @@ ESTADO ler_estado(char *args) {
 \brief Função que imprime os inimgos no tabuleiro
 */
 void imprime_inimigos(ESTADO e) {
-	int i;
+	int i; 
 	for(i = 0; i < e.num_inimigos; i++){
 		int j;
 		j = e.inimigo[i].type;
-		if (j == 1) IMAGEMI(getposinimigox (e,i), getposinimigoy (e,i), ESCALA, "Monstro2.png",i );
+		if (j == 1) IMAGEMI(getposinimigox (e,i), getposinimigoy (e,i), ESCALA, "Monstro2.png",i );  
 		if (j == 2) {IMAGEMI(getposinimigox (e,i), getposinimigoy (e,i), ESCALA, "Monstro3.png",i );
-					IMAGEMATARange(getposinimigox (e,i), getposinimigoy (e,i), ESCALA, "Shuriken2.png",i );					}
+					IMAGEMATARange(getposinimigox (e,i), getposinimigoy (e,i), ESCALA, "Shuriken2.png",i );					}  
 		if (j == 3) IMAGEMI(getposinimigox (e,i), getposinimigoy (e,i), ESCALA, "Monstro4.png",i );
-		if (j == 0) {IMAGEMI(getposinimigox (e,i), getposinimigoy (e,i), ESCALA, "Monstro1.png",i );
+		if (j == 0) {IMAGEMI(getposinimigox (e,i), getposinimigoy (e,i), ESCALA, "Monstro1.png",i ); 
 					IMAGEMATAFLAME(getposinimigox (e,i), getposinimigoy (e,i), ESCALA, "Fireball.png",i );					}
 		if (e.frezze)  IMAGEMT(getposinimigox (e,i), getposinimigoy (e,i), ESCALA, "Congelado.png",0.5 );
 	}
@@ -1326,14 +1319,14 @@ void imprime_obstaculos(ESTADO e) {
 		for(i = 0; i < e.num_obstaculos; i++){
 			if (e.obstaculo[i].type == 0){
 			IMAGEM(e.obstaculo[i].pos.x, e.obstaculo[i].pos.y, ESCALA, "Lava_Obsidian_2.png");
-			sprintf(link, "http://localhost/cgi-bin/dibs?pobs_%i", i);
+			sprintf(link, "http://localhost/cgi-bin/dibs?pobs_%i", i);	
 			ABRIR_LINK(link);
 			QUADRADOT(e.obstaculo[i].pos.x , e.obstaculo[i].pos.y ,ESCALA, "#982354",0.5);
 			FECHAR_LINK;}
-
+			
 			else
 			IMAGEM(e.obstaculo[i].pos.x, e.obstaculo[i].pos.y, ESCALA, "Lava_Obsidian_1.png");
-
+			
 		}
 	}
 }
@@ -1362,7 +1355,7 @@ void metescore (ESTADO e){
 	int fst,snd,trd,fourt;
 	char ficheiro[500];
 		while(fgets(ficheiro,sizeof ficheiro,score)!= NULL)
-{}
+{}		
 
 		sscanf(ficheiro, "%d-%d-%d-%d", &fst,&snd,&trd,&fourt );
 		score = fopen ("/tmp/score", "w+");
@@ -1376,12 +1369,12 @@ void metescore (ESTADO e){
 
 					}else if (scores > trd) {
 		printf ("<text x=%d y=%d style=fill:red;>HIGTHSCORE, CONSULTAR LISTA  </text> ", 100 ,100);
-
+						
 						fprintf(score, "%i-%i-%i-%i-", fst,snd,scores,trd);
 					}else if (scores > fourt) {
 		printf ("<text x=%d y=%d style=fill:red;>HIGTHSCORE, CONSULTAR LISTA  </text> ", 100 ,100);
 						fprintf(score, "%i-%i-%i-%i-", fst,snd,trd,scores);
-					}else
+					}else 			    	
 						fprintf(score, "%i-%i-%i-%i-", fst,snd,trd,fourt);
 				}
 	fclose(score);
@@ -1392,7 +1385,7 @@ void metescore (ESTADO e){
 */
 void imprime_skillz(ESTADO e){
 	char link[MAX_BUFFER];
-
+	
 
 	printf ("<text x=%d y=%d style=fill:black;>SCORES:   </text> ", 1400 ,100);
 	sprintf(link, "http://localhost/cgi-bin/dibs?scores");
@@ -1443,7 +1436,7 @@ void imprime_skillz(ESTADO e){
 
 	}
 
-	if (e.jog.viewspell == 1){
+	if (e.jog.viewspell == 1){	
 	printf ("<text x=%d y=%d style=fill:black;>VIEW:   </text> ", 908 ,290);
 	sprintf(link, "http://localhost/cgi-bin/dibs?skillz");
 	ABRIR_LINK(link);
@@ -1556,7 +1549,7 @@ void imprimescores( ESTADO e){
 	char ficheiro[500];
 	if (score){
 		while(fgets(ficheiro,sizeof ficheiro,score)!= NULL)
-{}
+{}		
 
 		sscanf(ficheiro, "%d-%d-%d-%d", &fst,&snd,&trd,&fourt );
 	fclose(score);
@@ -1575,7 +1568,7 @@ void imprimescores( ESTADO e){
 	ABRIR_LINK(link);
 	if (e.estadojog)
 	printf("<image x=%d y=%d width=%d height=%d fill=%s stroke=%s stroke-width='2' xlink:href=%s />\n", 1400, 140, 75, 75, "#f58000", "#000000" , IMAGE_PATH "X.png");
-	else
+	else 
 	printf("<image x=%d y=%d width=%d height=%d fill=%s stroke=%s stroke-width='2' xlink:href=%s />\n", 800, 800, 100, 100, "#f58000", "#000000" , IMAGE_PATH "X.png");
 
 	FECHAR_LINK;
@@ -1670,7 +1663,7 @@ void imprimeloja (ESTADO e){
 	printf ("<text x=%d y=%d style=fill:white;>Anel double exp  - 1000 gold  </text> ", 100 ,500);
 	}
 	else {
-	printf ("<text x=%d y=%d style=fill:white;>Anel double exp vendido  </text> ", 100 ,500);
+	printf ("<text x=%d y=%d style=fill:white;>Anel double exp vendido  </text> ", 100 ,500); 
 	printf("<image x=%d y=%d width=%d height=%d fill=%s stroke=%s stroke-width='2' xlink:href=%s />\n", 0, 450, 100, 100, "#f58000", "#000000" , IMAGE_PATH "expboostoff.png");
 
 	}
@@ -1688,7 +1681,7 @@ void imprimeloja (ESTADO e){
 	printf("<image x=%d y=%d width=%d height=%d fill=%s stroke=%s stroke-width='2' xlink:href=%s />\n", 0, 800, 100, 100, "#f58000", "#000000" , IMAGE_PATH "healpot.png");
 	FECHAR_LINK;
 	printf ("<text x=%d y=%d style=fill:white;>HEAL POT: Aumenta em 1 os healpots do jogador - 100 gold  </text> ", 100 ,850);
-
+	
 	sprintf(link, "http://localhost/cgi-bin/dibs?vendermanapot");
 	ABRIR_LINK(link);
 	printf("<image x=%d y=%d width=%d height=%d fill=%s stroke=%s stroke-width='2' xlink:href=%s />\n", 640, 500, 100, 100, "#f58000", "#000000" , IMAGE_PATH "manapot.png");
@@ -1703,7 +1696,7 @@ void imprimeloja (ESTADO e){
 
 }
 /**
-\brief Função que imprime o menu
+\brief Função que imprime o menu 
 */
 void makemenu(){
 	printf("<rect x=%d y=%d width=%d height=%d fill=%s stroke=%s stroke-width='2'/>\n", 2, 2, 900 , 900, "#ffffff","#000000");
@@ -1723,12 +1716,12 @@ void makemenu(){
 }
 
 /**
-\brief Função principal que imprime o mapa com o jogador, os inimigos,score, stats, obstáculos, saída, potes, loja ,etc
+\brief Função principal que imprime o mapa com o jogador, os inimigos,score, stats, obstáculos, saída, potes, loja ,etc 
 */
 int main() {
 	int x, y;
 	srandom (time(NULL));
-
+	
 		COMECAR_HTML;
 	ABRIR_SVG(1600, 1400);
 	ESTADO e = ler_estado(getenv("QUERY_STRING"));
@@ -1753,7 +1746,7 @@ int main() {
 	else if (e.estadojog == 0)
 		makemenu();
 	else {
-
+	
 
 		printf("<rect x=%d y=%d width=%d height=%d fill=%s stroke=%s stroke-width='2'/>\n", 2, 2, 900 , 900, "#ff0000","#000000");
 		for(y = 0; y < TAM; y++)
@@ -1770,10 +1763,10 @@ int main() {
 		imprime_jogador(e);
 		imprime_skillz(e);
 		imprime_stats(e);
+		
 
 
-
-
+				
 		}
 
 		FECHAR_SVG;
@@ -1781,3 +1774,4 @@ return 0;
 
 
 }
+

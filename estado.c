@@ -1,5 +1,3 @@
-
-
 #include <stdio.h>
 #include "estado.h"
 
@@ -15,7 +13,7 @@ char *estado2str(ESTADO e) {
 
 	for(i = 0; i < sizeof(ESTADO); i++)
 		sprintf(buffer, "%s%02x", buffer, p[i]);
-
+	
 	return buffer;
 }
 
@@ -29,6 +27,7 @@ ESTADO str2estado(char *argumentos) {
 		sscanf(argumentos, "%2x", &d);
 		p[i] = (unsigned char) d;
 	}
-
+	
 	return e;
 }
+

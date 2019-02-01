@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['batalharanged',['batalharanged',['../exemplo_8c.html#aecebfcc55ff73844b948fed0be03fd91',1,'exemplo.c']]]
+  ['inicializar',['inicializar',['../estado_8h.html#a5863f70b65419217b94562de9ff8d907',1,'exemplo.c']]]
 ];

@@ -3,8 +3,6 @@
 {\ttfamily \#include $<$stdio.\+h$>$}\\*
 Include dependency graph for cgi.\+h\+:
 % FIG 0
-This graph shows which files directly or indirectly include this file\+:
-% FIG 1
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
