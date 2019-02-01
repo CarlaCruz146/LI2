@@ -1,0 +1,20 @@
+digraph "estado"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="estado",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" saida\nshop" ,fontname="Helvetica"];
+  Node2 [label="posicao",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structposicao.html",tooltip="Estrutura que armazena uma posição. "];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" obstaculo" ,fontname="Helvetica"];
+  Node3 [label="obstaculos",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structobstaculos.html"];
+  Node2 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" pos" ,fontname="Helvetica"];
+  Node4 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" jog" ,fontname="Helvetica"];
+  Node4 [label="infojog",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structinfojog.html",tooltip="Estrutura que armazena informação relativa ao jogador. "];
+  Node2 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" pos" ,fontname="Helvetica"];
+  Node5 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" pot" ,fontname="Helvetica"];
+  Node5 [label="pot",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structpot.html",tooltip="Estrutura que armazena informação relativa aos potes das poções. "];
+  Node2 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" pos" ,fontname="Helvetica"];
+  Node6 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" inimigo" ,fontname="Helvetica"];
+  Node6 [label="infomonstro",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structinfomonstro.html",tooltip="Estrutura que armazena informação relativa aos monstros, desde o seu tipo ao seu nível. "];
+  Node2 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" pos" ,fontname="Helvetica"];
+}
